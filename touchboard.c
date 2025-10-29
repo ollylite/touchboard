@@ -118,7 +118,7 @@ int main(int argc,char**argv){
 	char s=1;
 	long long fi;
 	char*y=malloc(26);
-	char*z=malloc(5000);
+	char*z=malloc(6144);
 	char***l=malloc(24);
 	l[0]=malloc(80);
 	for(i=0;i<10;i++){
@@ -170,7 +170,7 @@ int main(int argc,char**argv){
 	tcsetattr(0,2,&t);
 	o=fcntl(0,3,0);
 	fcntl(0,4,o|2048);
-	setvbuf(stdout,z,0,5000);
+	setvbuf(stdout,z,0,6144);
 	while(c!=27){
 		for(i=0;i<10;i++){
 			l[0][i][0]--;
