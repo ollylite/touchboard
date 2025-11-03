@@ -171,7 +171,7 @@ int main(int argc,char**argv){
 	o=fcntl(0,3,0);
 	fcntl(0,4,o|2048);
 	setvbuf(stdout,z,0,6144);
-	while(c!=27){
+	while(1){
 		for(i=0;i<10;i++){
 			l[0][i][0]--;
 			if(l[0][i][0]<0){
@@ -288,16 +288,26 @@ int main(int argc,char**argv){
                                 }
                         }
                 }
-		c=getchar();
-		if((96<c)&&(c<123)){
-			if(inp(c,0)){
-				l[0][pos(c)][0]=6;
+		for(i=0;i<2;i++){
+	                c=0;
+	                read(0,&c,1);
+			if(c==27){
+				tcsetattr(0,2,&x);
+                                fcntl(0,4,o);
+                                printf("\033[H\033[J");
+                                fflush(stdout);
+                                return 0;
 			}
-			else if(inp(c,1)){
-				l[1][pos(c)][0]=6;
-			}
-			else{
-				l[2][pos(c)][0]=6;
+			if((96<c)&&(c<123)){
+				if(inp(c,0)){
+					l[0][pos(c)][0]=6;
+				}
+				else if(inp(c,1)){
+					l[1][pos(c)][0]=6;
+				}
+				else{
+					l[2][pos(c)][0]=6;
+				}
 			}
 		}
 		printf("\033[H\033[J\n\n\n");
@@ -397,11 +407,6 @@ int main(int argc,char**argv){
 		fflush(stdout);
 		usleep(50000);
 	}
-	tcsetattr(0,2,&x);
-	fcntl(0,4,o);
-	printf("\033[H\033[J");
-	fflush(stdout);
-	return 0;
 }
 /*
 
